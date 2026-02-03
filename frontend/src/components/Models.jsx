@@ -4,7 +4,7 @@ import {
   SwatchIcon,
   CurrencyDollarIcon,
   CheckCircleIcon,
-  SwitchHorizontalIcon,
+  ArrowsRightLeftIcon,
   InformationCircleIcon,
 } from '@heroicons/react/24/outline';
 
@@ -139,7 +139,7 @@ function Models() {
                     </>
                   ) : (
                     <>
-                      <SwitchHorizontalIcon className="w-4 h-4" />
+                      <ArrowsRightLeftIcon className="w-4 h-4" />
                       Activer
                     </>
                   )}

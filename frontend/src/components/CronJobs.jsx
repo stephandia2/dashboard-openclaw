@@ -7,7 +7,7 @@ import {
   ClockIcon,
   CheckCircleIcon,
   XCircleIcon,
-  RefreshIcon,
+  ArrowPathIcon,
 } from '@heroicons/react/24/outline';
 
 function CronJobs() {
@@ -104,7 +104,7 @@ function CronJobs() {
           onClick={refetch}
           className="btn-secondary flex items-center gap-2"
         >
-          <RefreshIcon className="w-5 h-5" />
+          <ArrowPathIcon className="w-5 h-5" />
           Actualiser
         </button>
       </div>
@@ -161,7 +161,7 @@ function CronJobs() {
                       title="Exécuter"
                     >
                       {runningJobs.has(job.id) ? (
-                        <RefreshIcon className="w-5 h-5 animate-spin" />
+                        <ArrowPathIcon className="w-5 h-5 animate-spin" />
                       ) : (
                         <PlayIcon className="w-5 h-5" />
                       )}

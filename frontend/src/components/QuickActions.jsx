@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { apiPost } from '../hooks/useApi';
 import {
   BoltIcon,
-  RefreshIcon,
+  ArrowPathIcon,
   TrashIcon,
-  DatabaseIcon,
-  CloudUploadIcon,
+  ServerIcon,
+  CloudArrowUpIcon,
   CogIcon,
-  ExclamationIcon,
+  ExclamationTriangleIcon,
   CheckCircleIcon,
 } from '@heroicons/react/24/outline';
 
@@ -16,7 +16,7 @@ const ACTIONS = [
     id: 'restart',
     name: 'Redémarrer Gateway',
     description: 'Redémarre le service Gateway OpenClaw',
-    icon: RefreshIcon,
+    icon: ArrowPathIcon,
     color: 'blue',
     dangerous: false,
   },
@@ -32,7 +32,7 @@ const ACTIONS = [
     id: 'backup',
     name: 'Créer une backup',
     description: 'Crée une sauvegarde complète de la configuration',
-    icon: DatabaseIcon,
+    icon: ServerIcon,
     color: 'green',
     dangerous: false,
   },
@@ -40,7 +40,7 @@ const ACTIONS = [
     id: 'update-skills',
     name: 'Mettre à jour les skills',
     description: 'Télécharge les dernières versions des skills',
-    icon: CloudUploadIcon,
+    icon: CloudArrowUpIcon,
     color: 'purple',
     dangerous: false,
   },
@@ -56,7 +56,7 @@ const ACTIONS = [
     id: 'emergency-stop',
     name: 'Arrêt d\'urgence',
     description: 'Arrête immédiatement tous les agents et services',
-    icon: ExclamationIcon,
+    icon: ExclamationTriangleIcon,
     color: 'red',
     dangerous: true,
   },
@@ -169,7 +169,7 @@ function QuickActions() {
                     {result.success ? (
                       <CheckCircleIcon className="w-5 h-5 text-green-400" />
                     ) : (
-                      <ExclamationIcon className="w-5 h-5 text-red-400" />
+                      <ExclamationTriangleIcon className="w-5 h-5 text-red-400" />
                     )}
                     <span className={result.success ? 'text-green-300' : 'text-red-300'}>
                       {result.message}
@@ -204,7 +204,7 @@ function QuickActions() {
       {/* Section d'avertissement */}
       <div className="card bg-yellow-900/20 border-yellow-600/30">
         <div className="flex items-start gap-3">
-          <ExclamationIcon className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" />
+          <ExclamationTriangleIcon className="w-6 h-6 text-yellow-400 flex-shrink-0 mt-0.5" />
           <div>
             <h4 className="text-yellow-300 font-medium mb-1">Attention</h4>
             <p className="text-yellow-200/70 text-sm">
@@ -237,7 +237,7 @@ function QuickActions() {
                     {result.success ? (
                       <CheckCircleIcon className="w-5 h-5 text-green-400" />
                     ) : (
-                      <ExclamationIcon className="w-5 h-5 text-red-400" />
+                      <ExclamationTriangleIcon className="w-5 h-5 text-red-400" />
                     )}
                     <span className="text-gray-300">{action?.name}</span>
                   </div>

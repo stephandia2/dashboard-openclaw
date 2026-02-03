@@ -3,9 +3,9 @@ import { useApi } from '../hooks/useApi';
 import { io } from 'socket.io-client';
 import {
   DocumentTextIcon,
-  FilterIcon,
+  FunnelIcon,
   TrashIcon,
-  DownloadIcon,
+  ArrowDownTrayIcon,
   PauseIcon,
   PlayIcon,
 } from '@heroicons/react/24/outline';
@@ -157,7 +157,7 @@ function LogsViewer() {
         <div className="flex flex-wrap items-center gap-4">
           {/* Filtre par niveau */}
           <div className="flex items-center gap-2">
-            <FilterIcon className="w-5 h-5 text-gray-400" />
+            <FunnelIcon className="w-5 h-5 text-gray-400" />
             <select
               value={levelFilter}
               onChange={(e) => setLevelFilter(e.target.value)}
@@ -223,7 +223,7 @@ function LogsViewer() {
               onClick={downloadLogs}
               className="btn-primary flex items-center gap-2"
             >
-              <DownloadIcon className="w-4 h-4" />
+              <ArrowDownTrayIcon className="w-4 h-4" />
               Télécharger
             </button>
           </div>
