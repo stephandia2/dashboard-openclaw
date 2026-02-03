@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  dashboard:
+    build: .
+    container_name: openclaw-dashboard
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./instance:/app/instance
+      - ./logs:/app/logs
+    environment:
+      - FLASK_ENV=production
+      - SECRET_KEY=${SECRET_KEY:-change-me-in-production}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Service optionnel pour le frontend (mode production)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: openclaw-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - dashboard
+    restart: unless-stopped

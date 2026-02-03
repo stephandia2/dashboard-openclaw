@@ -1,0 +1,20 @@
+# OpenClaw Dashboard - Requirements
+# Fichier: requirements.txt
+
+# Flask et extensions
+Flask==3.0.0
+Flask-CORS==4.0.0
+Flask-SQLAlchemy==3.1.1
+Flask-SocketIO==5.3.6
+
+# Serveur WebSocket
+python-socketio==5.9.0
+eventlet==0.33.3
+
+# Database
+SQLAlchemy==2.0.23
+
+# Utilitaires
+python-dateutil==2.8.2
+Werkzeug==3.0.1
+click==8.1.7
