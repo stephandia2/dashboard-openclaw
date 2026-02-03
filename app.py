@@ -541,4 +541,6 @@ if __name__ == '__main__':
     
     print("🚀 OpenClaw Dashboard démarré sur http://localhost:5000")
     print("📊 API: http://localhost:5000/api")
-    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
+    
+    # Mode production : pas de debug
+    socketio.run(app, host='0.0.0.0', port=5000, debug=False, allow_unsafe_werkzeug=True)
