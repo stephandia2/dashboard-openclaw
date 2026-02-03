@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # Backend Flask
   dashboard:
     build: .
     container_name: openclaw-dashboard
@@ -14,14 +15,16 @@ services:
       - SECRET_KEY=${SECRET_KEY:-change-me-in-production}
     restart: unless-stopped
 
-  # Service optionnel pour le frontend (mode production)
+  # Frontend React (mode dev pour test rapide)
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: node:20-alpine
     container_name: openclaw-frontend
+    working_dir: /app
+    command: sh -c "npm install -g vite && npm run dev -- --host 0.0.0.0 --port 80"
     ports:
       - "80:80"
+    volumes:
+      - ./frontend:/app
     depends_on:
       - dashboard
     restart: unless-stopped
@@ -30,4 +33,4 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 30s
