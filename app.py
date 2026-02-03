@@ -1,7 +1,7 @@
 # OpenClaw Dashboard - Flask Backend
 # Fichier: app.py
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit
 from flask_sqlalchemy import SQLAlchemy
@@ -519,9 +519,9 @@ def serve_frontend(path):
     index_path = os.path.join(frontend_path, 'index.html')
     
     if path and os.path.exists(os.path.join(frontend_path, path)):
-        return app.send_static_file(path)
+        return send_from_directory(frontend_path, path)
     elif os.path.exists(index_path):
-        return app.send_static_file('index.html')
+        return send_from_directory(frontend_path, 'index.html')
     else:
         return jsonify({'error': 'Frontend not built. Run: cd frontend && npm run build'}), 503
 
