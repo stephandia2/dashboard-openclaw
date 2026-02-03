@@ -508,6 +508,24 @@ def init_database():
         print("Base de données initialisée")
 
 # =============================================================================
+# STATIC FILES SERVING (Frontend React)
+# =============================================================================
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_frontend(path):
+    """Sert les fichiers statiques du frontend React"""
+    frontend_path = os.path.join(os.path.dirname(__file__), 'frontend', 'dist')
+    index_path = os.path.join(frontend_path, 'index.html')
+    
+    if path and os.path.exists(os.path.join(frontend_path, path)):
+        return app.send_static_file(path)
+    elif os.path.exists(index_path):
+        return app.send_static_file('index.html')
+    else:
+        return jsonify({'error': 'Frontend not built. Run: cd frontend && npm run build'}), 503
+
+# =============================================================================
 # POINT D'ENTRÉE
 # =============================================================================
 
@@ -522,4 +540,5 @@ if __name__ == '__main__':
     log_thread.start()
     
     print("🚀 OpenClaw Dashboard démarré sur http://localhost:5000")
+    print("📊 API: http://localhost:5000/api")
     socketio.run(app, host='0.0.0.0', port=5000, debug=True)

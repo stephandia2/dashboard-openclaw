@@ -1,32 +1,39 @@
-# Dockerfile pour OpenClaw Dashboard
+# Dockerfile pour OpenClaw Dashboard (Multi-stage build)
 # Fichier: Dockerfile
 
+# Stage 1: Build frontend
+FROM node:20-alpine as frontend-builder
+WORKDIR /app/frontend
+COPY frontend/ .
+RUN npm install && npm run build
+
+# Stage 2: Flask backend
 FROM python:3.11-slim
 
-# Définir le répertoire de travail
 WORKDIR /app
 
-# Installer les dépendances système
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
-    libpq-dev \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copier les fichiers de requirements
+# Copy requirements and install Python deps
 COPY requirements.txt .
-
-# Installer les dépendances Python
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier le code de l'application
+# Copy app code
 COPY app.py .
 COPY database/ ./database/
 
-# Créer le volume pour la base de données
-VOLUME ["/app/instance"]
+# Copy built frontend from stage 1
+COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
-# Exposer le port
+# Create instance directory
+RUN mkdir -p /app/instance
+
+# Expose port
 EXPOSE 5000
 
-# Commande de démarrage
+# Start command
 CMD ["python", "app.py"]
